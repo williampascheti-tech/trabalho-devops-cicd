@@ -9,14 +9,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: 1. Fazer checkout do código
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: 2. Configurar Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - run: cd backend && npm install
+      - name: 3. Instalar dependências
+        working-directory: ./backend
+        run: npm install
 
-      - run: cd backend && npm test
+      - name: 4. Executar testes
+        working-directory: ./backend
+        run: npm test
 
-      - run: echo "Deploy simulado"
+      - name: 5. Verificar versão do Node.js
+        run: node -v
+
+      - name: 6. Listar arquivos do projeto
+        run: ls -la
+
+      - name: 7. Simular deploy
+        run: echo "Deploy realizado com sucesso!"
